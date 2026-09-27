@@ -1,0 +1,30 @@
+* text=auto eol=lf
+
+# C/C++
+*.c      text eol=lf
+*.h      text eol=lf
+*.cc     text eol=lf
+*.cpp    text eol=lf
+*.cxx    text eol=lf
+*.hpp    text eol=lf
+*.hxx    text eol=lf
+*.ipp    text eol=lf
+*.inl    text eol=lf
+
+# CMake
+CMakeLists.txt text eol=lf
+*.cmake        text eol=lf
+
+# Documentation / config
+*.md    text eol=lf
+*.txt   text eol=lf
+*.json  text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.toml  text eol=lf
+*.ini   text eol=lf
+
+# Shell scripts
+*.sh  text eol=lf
+*.bat text eol=lf
+*.ps1 text eol=lf
