@@ -20,9 +20,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Setup CMake
-        uses: lukka/get-cmake@v4
-
       - name: Configure
         run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
 
