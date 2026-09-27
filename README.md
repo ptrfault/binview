@@ -6,7 +6,7 @@ A lightweight C++11 binary data viewing and reading library
 
 * header-only
 * zero-copy
-* 0 dependencies
+* no library or runtime dependencies
 * platform-independent
 * little-endian and big-endian support
 * works with raw memory and contiguous containers
@@ -107,10 +107,37 @@ cmake --build build
 ctest --test-dir build --output-on-failure
 ```
 
+## Benchmarks
+
+The runtime benchmark uses [nanobench](https://github.com/martinus/nanobench), and CMake fetches it only when `BINVIEW_BUILD_BENCHMARKS` is enabled (off by default).
+
+```bash
+cmake -S . -B build-bench -DBINVIEW_BUILD_TESTS=OFF -DBINVIEW_BUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release
+cmake --build build-bench
+./build-bench/binview_runtime_benchmarks
+```
+
+One Release run on Windows x64 with `clang-cl`, using a 256-byte in-memory buffer and batches of 64 reads:
+
+| Benchmark | Approx. time per read | Approx. throughput |
+| --- | ---: | ---: |
+| `read_le<uint32_t>` | 0.05 ns | 19.9 billion reads/s |
+| Byte-loop reference | 0.05 ns | 19.6 billion reads/s |
+| `View::read<uint32_t>` | 0.73 ns | 1.36 billion reads/s |
+| Sequential `Reader::read_le<uint32_t>` | 0.48 ns | 2.07 billion reads/s |
+
+These timings are from my machine and show the throughput of 64 reads with warm buffers, rather than the latency of a single read
+
+The compile-time benchmark is a separate target:
+
+```bash
+cmake -E time cmake --build build-bench --target binview_compile_time_benchmark --clean-first
+```
+
 ## Requirements
 
 * C++11 or newer
-* CMake 3.10 or newer
+* CMake 3.11 or newer
 
 ## License
 

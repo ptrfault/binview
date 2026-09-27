@@ -17,6 +17,7 @@ namespace binview
         static_assert( std::is_integral< T >::value, "T must be an integral type" );
 
         typedef typename std::make_unsigned< T >::type unsigned_type;
+
         unsigned_type value = 0;
 
         for( std::size_t i = 0; i < sizeof( T ); ++i )

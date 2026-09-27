@@ -36,7 +36,7 @@ namespace binview
         template< typename T >
         bool read_le( T& out ) noexcept
         {
-            if( !data_.contains( offset_, sizeof( T ) ) )
+            if( sizeof( T ) > remaining( ) )
             {
                 return false;
             }
@@ -50,7 +50,7 @@ namespace binview
         template< typename T >
         bool read_be( T& out ) noexcept
         {
-            if( !data_.contains( offset_, sizeof( T ) ) )
+            if( sizeof( T ) > remaining( ) )
             {
                 return false;
             }
