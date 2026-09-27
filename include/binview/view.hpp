@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 ptrfault
+
 #ifndef BINVIEW_VIEW_HPP
 #define BINVIEW_VIEW_HPP
 
@@ -14,7 +17,7 @@ namespace binview
         View( ) noexcept : m_data_( 0 ), m_size_( 0 ) { }
         View( const void* data, std::size_t size ) noexcept : m_data_( static_cast< const byte* >( data ) ), m_size_( size ) { }
 
-        // @note - wizard: support for arrays
+        // @note - ptrfault: support for arrays
         template< typename T, std::size_t N >
         View( const T ( &data )[ N ] ) noexcept : m_data_( reinterpret_cast< const byte* >( data ) ), m_size_( sizeof( T ) * N )
         {

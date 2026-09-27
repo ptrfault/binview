@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 ptrfault
+
 #ifndef BINVIEW_ENDIAN_HPP
 #define BINVIEW_ENDIAN_HPP
 

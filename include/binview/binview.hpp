@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 ptrfault
+
 #ifndef BINVIEW_HPP
 #define BINVIEW_HPP
 
@@ -5,6 +8,5 @@
 #include "reader.hpp"
 #include "types.hpp"
 #include "view.hpp"
-
 
 #endif
