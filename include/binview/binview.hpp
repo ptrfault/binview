@@ -8,5 +8,7 @@
 #include "reader.hpp"
 #include "types.hpp"
 #include "view.hpp"
+#include "writer.hpp"
+
 
 #endif

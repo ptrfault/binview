@@ -20,6 +20,7 @@ namespace binview
         std::size_t position( ) const noexcept { return offset_; }
         std::size_t remaining( ) const noexcept { return data_.size( ) - offset_; }
 
+        // @note - ptrfault: failed skips leave the cursor unchanged
         bool skip( std::size_t size ) noexcept
         {
             if( size > remaining( ) )
@@ -31,6 +32,7 @@ namespace binview
             return true;
         }
 
+        // @note - ptrfault: the cursor advances only after a successful read
         template< typename T >
         bool read_le( T& out ) noexcept
         {
@@ -59,6 +61,7 @@ namespace binview
             return true;
         }
 
+        // @note - ptrfault: returns a zero-copy view of the unread portion without moving the cursor
         View remaining_view( ) const noexcept { return data_.subview( offset_, remaining( ) ); }
 
       private:

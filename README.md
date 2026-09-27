@@ -4,12 +4,13 @@ A lightweight C++11 binary data viewing and reading library
 
 # Features
 
-- header-only
-- zero-copy
-- 0 dependencies
-- platform-independent
-- little-endian and big-endian support
-- works with raw memory and contigious containers
+* header-only
+* zero-copy
+* 0 dependencies
+* platform-independent
+* little-endian and big-endian support
+* works with raw memory and contiguous containers
+* supports read-only and mutable views
 
 ## Usage
 
@@ -22,6 +23,7 @@ const std::uint8_t data[] = { 0x4D, 0x5A, 0x90, 0x00 };
 binview::View view( data );
 
 std::uint16_t magic = 0;
+
 if( view.read( 0, magic ) )
 {
     // ...
@@ -30,7 +32,7 @@ if( view.read( 0, magic ) )
 
 ### Containers
 
-`View` can be created from raw memory, while `make_view()` supports contiguous containers such as `std::vector` and `std::array`
+`View` can be created from raw memory, while `make_view()` supports contiguous containers such as `std::vector` and `std::array`.
 
 ```cpp
 #include <array>
@@ -44,15 +46,22 @@ auto vector_view = binview::make_view( bytes );
 auto array_view = binview::make_view( array );
 ```
 
+For mutable containers, use `make_mutable_view()`:
+
+```cpp
+auto mutable_view = binview::make_mutable_view( bytes );
+mutable_view[ 0 ] = 0xFF;
+```
+
 ### Reader
 
-For sequential binary parsing:
+For sequential binary parsing. `read()` defaults to little-endian:
 
 ```cpp
 binview::Reader reader{ view };
 
 std::uint16_t value;
-if( reader.read_le( value ) )
+if( reader.read( value ) )
 {
     // ...
 }
@@ -62,6 +71,24 @@ Big-endian reads are also supported:
 
 ```cpp
 reader.read_be( value );
+```
+
+### Writer
+
+For sequential binary writing. `write()` defaults to little-endian:
+
+```cpp
+binview::MutableView view = binview::make_mutable_view( bytes );
+binview::Writer writer{ view };
+
+writer.write( std::uint16_t( 0x1234 ) );
+writer.write( std::uint32_t( 0xDEADBEEF ) );
+```
+
+Big-endian writes are also supported:
+
+```cpp
+writer.write_be( std::uint32_t( 0x12345678 ) );
 ```
 
 ## Building
