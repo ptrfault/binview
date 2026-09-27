@@ -12,6 +12,14 @@ A lightweight C++11 binary data viewing and reading library
 * works with raw memory and contiguous containers
 * supports read-only and mutable views
 
+## Future
+
+* floating-point reads and writes
+* ULEB128 and SLEB128 support
+* bit-level reader and writer
+* additional binary encoding utilities
+
+
 ## Usage
 
 ```cpp
