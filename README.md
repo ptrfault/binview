@@ -52,7 +52,7 @@ For sequential binary parsing:
 binview::Reader reader{ view };
 
 std::uint16_t value;
-if (reader.read_le(value))
+if( reader.read_le( value ) )
 {
     // ...
 }
@@ -61,7 +61,7 @@ if (reader.read_le(value))
 Big-endian reads are also supported:
 
 ```cpp
-reader.read_be(value);
+reader.read_be( value );
 ```
 
 ## Building
